@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bolaji Adekunle</title>
+<meta name="description" content="Bolaji Adekunle, Data Engineer. SQL Server, SSIS, Python and Power BI, with five years in the public sector.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+[hidden] { display: none !important; }
+img { max-width: 100%; }
+/* Layout: editorial portfolio. Fixed left sidebar (menu, contact) on wide screens, slide-in drawer on phones; main column with header bar, intro, projects, experience, skills. */
+:root {
+  --bg: #ffffff;
+  --panel: #f4f6f8;
+  --ink: #2b333b;
+  --heading: #1c2733;
+  --muted: #66727e;
+  --line: #dde3e9;
+  --accent: #2b5d8a;
+  --accent-ink: #ffffff;
+  --display: "Roboto Slab", Georgia, "Times New Roman", serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --side: 300px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14191f; --panel: #1b222a; --ink: #d3dbe2; --heading: #eef2f6; --muted: #95a2ae;
+    --line: #2c3640; --accent: #6fa6d6; --accent-ink: #0f1419; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14191f; --panel: #1b222a; --ink: #d3dbe2; --heading: #eef2f6; --muted: #95a2ae;
+  --line: #2c3640; --accent: #6fa6d6; --accent-ink: #0f1419; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 var(--body); }
+a { color: var(--accent); }
+h1, h2, h3 { font-family: var(--display); color: var(--heading); line-height: 1.25; text-wrap: balance; margin: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.layout { display: flex; min-height: 100%; }
+
+/* Sidebar */
+.sidebar {
+  width: var(--side); flex: none; background: var(--panel); border-right: 1px solid var(--line);
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  padding: 28px 28px calc(28px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(28px, env(safe-area-inset-left, 0px));
+  display: grid; align-content: start; gap: 36px;
+}
+.side-title { font: 700 0.78rem var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--heading); padding-bottom: 10px; border-bottom: 2px solid var(--accent); width: fit-content; }
+.menu { list-style: none; margin: 14px 0 0; padding: 0; }
+.menu a { display: block; padding: 11px 0; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; }
+.menu a:hover { color: var(--accent); }
+.side-contact p { color: var(--muted); font-size: 0.95rem; margin: 14px 0; }
+.contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.contact-list li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: 0.95rem; overflow-wrap: anywhere; }
+.contact-list svg { width: 18px; height: 18px; margin-top: 4px; fill: var(--accent); }
+.side-foot { font-size: 0.8rem; color: var(--muted); }
+
+/* Main */
+.main { flex: 1; min-width: 0; }
+.inner {
+  max-width: 1100px; margin: 0 auto;
+  padding-left: max(48px, env(safe-area-inset-left, 0px));
+  padding-right: max(48px, env(safe-area-inset-right, 0px));
+}
+.topbar { border-bottom: 3px solid var(--accent); }
+.topbar .inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 22px 18px; }
+.logo { font-family: var(--display); color: var(--heading); text-decoration: none; font-size: 1.05rem; }
+.logo strong { font-weight: 700; }
+.icons { display: flex; gap: 14px; align-items: center; }
+.icons a { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--muted); }
+.icons a:hover { color: var(--accent); }
+.icons svg { width: 19px; height: 19px; fill: currentColor; }
+.menu-btn { display: none; font: 600 0.9rem var(--body); background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+
+section { padding-block: 64px; border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: 0; }
+.eyebrow { font: 700 0.78rem var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.section-head { display: grid; gap: 4px; margin-bottom: 36px; }
+.section-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
+.section-head p { color: var(--muted); margin: 6px 0 0; max-width: 62ch; }
+
+/* Intro */
+.intro { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+.intro h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); }
+.headline { font: 600 1.05rem var(--body); color: var(--accent); margin: 12px 0 22px; letter-spacing: 0.01em; }
+.intro p { margin: 0 0 16px; max-width: 64ch; }
+.stats { display: flex; gap: 28px; flex-wrap: wrap; margin: 26px 0 30px; padding: 18px 0; border-block: 1px solid var(--line); }
+.stat b { display: block; font: 700 1.7rem var(--display); color: var(--heading); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 0.88rem; color: var(--muted); }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; font: 700 0.82rem var(--body); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 12px 22px; border-radius: 4px; border: 2px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { color: var(--accent); }
+.portrait { width: 100%; max-width: 380px; aspect-ratio: 4 / 5; border-radius: 6px; background: var(--panel); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; justify-self: end; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.portrait .initials { font: 700 5.5rem var(--display); color: var(--accent); letter-spacing: 0.04em; }
+
+/* Projects */
+.projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px 32px; }
+.project { display: grid; gap: 12px; align-content: start; }
+.thumb { aspect-ratio: 16 / 9; max-width: 100%; border-radius: 6px; background: var(--panel); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
+.thumb svg { width: 78%; height: auto; }
+.thumb .s { stroke: var(--accent); fill: none; stroke-width: 2; }
+.thumb .f { fill: var(--accent); }
+.thumb .m { fill: var(--line); }
+.project h3 { font-size: 1.15rem; }
+.project h3 a { color: inherit; text-decoration: none; }
+.project h3 a:hover { color: var(--accent); }
+.project p { margin: 0; color: var(--ink); font-size: 0.98rem; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font: 600 0.72rem var(--body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 2px 8px; }
+.project .more { font: 700 0.78rem var(--body); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+
+/* Experience */
+.timeline { display: grid; gap: 28px; max-width: 760px; }
+.role { display: grid; grid-template-columns: 14px 1fr; gap: 18px; }
+.role::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 8px; }
+.role h3 { font-size: 1.15rem; }
+.role .where { color: var(--muted); font-size: 0.92rem; margin: 2px 0 8px; }
+.role ul { margin: 0; padding-left: 18px; }
+.role li { margin: 4px 0; }
+
+/* Skills */
+.skill-group + .skill-group { margin-top: 48px; }
+.skill-group h3 { font-size: 1.25rem; margin-bottom: 22px; }
+.skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px 36px; }
+.skill { display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; }
+.skill .ic { width: 52px; height: 52px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; }
+.skill .ic svg { width: 26px; height: 26px; fill: none; stroke: var(--accent-ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.skill h4 { margin: 0 0 4px; font: 700 1.02rem var(--display); color: var(--heading); }
+.skill p { margin: 0; font-size: 0.95rem; }
+.tools { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 30px; }
+.tools span { font-size: 0.9rem; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 4px 10px; }
+
+.contact-main { display: grid; gap: 14px; max-width: 64ch; }
+.footer { padding-block: 26px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
+
+/* Phones and tablets: sidebar becomes a drawer */
+@media (max-width: 1000px) {
+  .sidebar {
+    position: fixed; z-index: 30; left: 0; top: 0; bottom: 0; height: auto;
+    padding-top: calc(28px + env(safe-area-inset-top, 0px));
+    transform: translateX(-100%); visibility: hidden; transition: transform .25s ease, visibility .25s;
+    box-shadow: 0 0 40px rgba(0,0,0,.25); width: min(var(--side), 86vw);
+  }
+  .sidebar.open { transform: none; visibility: visible; }
+  .scrim { position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 25; }
+  .menu-btn { display: inline-block; }
+  .inner { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+  .intro { grid-template-columns: 1fr; gap: 32px; }
+  .portrait { justify-self: start; max-width: 260px; order: -1; }
+  .portrait .initials { font-size: 4rem; }
+  section { padding-block: 48px; }
+}
+@media (prefers-reduced-motion: reduce) { .sidebar { transition: none; } }
+</style>
+
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar" id="sidebar" aria-label="Site menu">
+    <nav>
+      <div class="side-title">Menu</div>
+      <ul class="menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://github.com/Bimmerish/data-engineering-portfolio" target="_blank" rel="noopener">Source code</a></li>
+      </ul>
+    </nav>
+    <div class="side-contact">
+      <div class="side-title">Get in touch</div>
+      <p>Happy to talk about data engineering, public sector data, or any of the projects here.</p>
+      <ul class="contact-list" id="side-contacts"></ul>
+    </div>
+    <div class="side-foot">© <span id="year">2026</span> Bolaji Adekunle</div>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="inner">
+        <a class="logo" href="#about"><strong>Bolaji Adekunle</strong> · Data Engineer</a>
+        <div class="icons" id="top-icons">
+          <button class="menu-btn" id="menu-btn" aria-controls="sidebar" aria-expanded="false">Menu</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="inner">
+      <section id="about">
+        <div class="intro">
+          <div>
+            <div class="eyebrow">Data Engineer</div>
+            <h1>Hi, I'm Bolaji Adekunle</h1>
+            <div class="headline">Data Engineer | Data Scientist | SQL Server</div>
+            <p>I'm a data engineer with five years' experience in the public sector. I've worked on forecasting and operational reporting for electronic monitoring services, and with local government data across healthcare, social care, and adult and children's services.</p>
+            <p>Most of my work is building and running the pipelines that take data from operational systems into warehouses and reports that people depend on. That means ETL and ELT in SQL Server and SSIS, migrating data between platforms, data warehousing, and modelling data for Power BI. I care about pipelines that can be re-run safely, fail clearly when something is wrong, and are easy for the next person to pick up.</p>
+            <p>I also use Python and machine learning for forecasting and analysis where it adds value, and I'm comfortable with cloud platforms and database administration.</p>
+            <p>Alongside my core role, I've supported the Youth Futures Foundation's work in Blackpool, helping improve the local data ecosystem behind efforts to reduce the number of young people who are not in education, employment or training (NEET).</p>
+            <div class="stats">
+              <div class="stat"><b>5 yrs</b><span>Public sector data</span></div>
+              <div class="stat"><b>Up to 90%</b><span>Faster data processing</span></div>
+              <div class="stat"><b>Up to 60%</b><span>Operational efficiency gains</span></div>
+            </div>
+            <div class="actions">
+              <a class="btn primary" href="#projects">View projects</a>
+              <a class="btn ghost" href="#contact">Contact</a>
+            </div>
+          </div>
+          <div class="portrait" id="portrait"><span class="initials">BA</span></div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-head">
+          <div class="eyebrow">Projects</div>
+          <h2>Selected work</h2>
+          <p>Built on public datasets so the code and data can be shared. Each project has setup steps and notes on the design decisions behind it.</p>
+        </div>
+        <div class="projects" id="project-grid"></div>
+      </section>
+
+      <section id="experience">
+        <div class="section-head">
+          <div class="eyebrow">Experience</div>
+          <h2>Where I've worked with data</h2>
+        </div>
+        <div class="timeline">
+          <div class="role">
+            <div>
+              <h3>Data Engineer, local government</h3>
+              <div class="where">Healthcare, social care, adult and children's services</div>
+              <ul>
+                <li>Build and maintain SQL Server and SSIS pipelines feeding operational systems and Power BI reporting.</li>
+                <li>Migrate data between platforms and keep the database estate healthy.</li>
+                <li>Support the Youth Futures Foundation's NEET reduction work in Blackpool by improving how local data is joined up.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="role">
+            <div>
+              <h3>Electronic monitoring services</h3>
+              <div class="where">Forecasting and operations data</div>
+              <ul>
+                <li>Delivered forecasting and operational reporting for electronic monitoring services.</li>
+                <li>Worked with operations teams to turn monitoring data into planning information.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-head">
+          <div class="eyebrow">Skills</div>
+          <h2>What I bring</h2>
+        </div>
+        <div class="skill-group">
+          <h3>Technical skills</h3>
+          <div class="skills" id="tech-skills"></div>
+          <div class="tools" aria-label="Tools">
+            <span>SQL Server</span><span>T-SQL</span><span>SSMS</span><span>SSIS</span><span>Oracle SQL Developer</span><span>SQL Anywhere</span><span>Python</span><span>Power BI</span><span>DAX</span><span>Excel</span><span>Git</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Working style</h3>
+          <div class="skills" id="soft-skills"></div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-head">
+          <div class="eyebrow">Contact</div>
+          <h2>Get in touch</h2>
+        </div>
+        <div class="contact-main">
+          <p>If you'd like to talk about a role, a project, or anything in this portfolio, the best way to reach me is below.</p>
+          <ul class="contact-list" id="main-contacts"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer"><div class="inner">© <span id="year2">2026</span> Bolaji Adekunle</div></footer>
+  </div>
+</div>
+
+<script>
+/* Edit these to update the site. Empty values are hidden. */
+const PROFILE = {
+  github: "https://github.com/Bimmerish",
+  linkedin: "https://www.linkedin.com/in/bolaji-a-886ab31a2/",
+  email: "",             // a public contact address
+  cv: "",                // link to your CV
+  photo: ""              // e.g. "images/profile.jpg"
+};
+
+const REPO = "https://github.com/Bimmerish/data-engineering-portfolio/tree/main/";
+
+const PROJECTS = [
+  { dir: "01-retail-sales-dwh", title: "Retail Sales Data Warehouse", tags: ["T-SQL"], art: "star",
+    text: "Star schema built from AdventureWorks, with a Type 2 customer dimension and a fact load that can be re-run safely for any date range." },
+  { dir: "02-incremental-load-framework", title: "Incremental Load Framework", tags: ["T-SQL", "SSIS"], art: "flow",
+    text: "Watermark-based loading with a control table, run log and row count reconciliation. The watermark only moves after a successful load." },
+  { dir: "03-data-quality-monitoring", title: "Data Quality Monitoring", tags: ["T-SQL"], art: "check",
+    text: "Data quality rules stored as data. One procedure runs them after each load, records every result, and fails the job on critical issues." },
+  { dir: "04-nyc-taxi-pipeline", title: "NYC Taxi Trips Pipeline", tags: ["Python", "SQL Server"], art: "bars",
+    text: "Loads millions of NYC taxi trips a month from Parquet into SQL Server in batches, logs rejected rows, and publishes each month in one transaction." },
+  { dir: "05-api-ingestion-pipeline", title: "REST API Ingestion", tags: ["Python"], art: "api",
+    text: "Pulls historical weather from the Open-Meteo API with retries and backoff, keeping raw responses so data can be rebuilt without calling the API again." },
+  { dir: "06-uk-house-prices-sql", title: "UK House Prices Analysis", tags: ["T-SQL"], art: "line",
+    text: "Land Registry sales analysed with window functions: median prices, year-on-year change, rolling averages and top districts by county." },
+  { dir: "07-airflow-orchestration", title: "Airflow Orchestration", tags: ["Python", "Airflow", "Docker"], art: "dag",
+    text: "Daily DAG that extracts, validates, loads and reports, with retries, a validation gate and failure alerts. Compared against SSIS and SQL Agent." },
+  { dir: "08-query-tuning-case-study", title: "Query Tuning Case Study", tags: ["T-SQL"], art: "gauge",
+    text: "Five common causes of slow queries on the Stack Overflow database, diagnosed from execution plans and measured before and after each fix." },
+  { dir: "09-change-tracking-sync", title: "Change Tracking Sync", tags: ["T-SQL", "Python"], art: "sync",
+    text: "Keeps a reporting copy in step with its source using SQL Server Change Tracking, including deletes, with a safe fallback to a full reload." },
+  { dir: "10-public-health-powerbi", title: "Public Health Data Pipeline", tags: ["Python", "Power BI"], art: "map",
+    text: "Public health indicators from the Fingertips API turned into a star schema and Power BI model with measures for trends and area comparison." }
+];
+
+const ART = {
+  star: '<circle class="f" cx="100" cy="56" r="13"/><g class="s"><path d="M100 56L40 22M100 56L160 22M100 56L40 92M100 56L160 92"/></g><rect class="m" x="22" y="12" width="36" height="20" rx="3"/><rect class="m" x="142" y="12" width="36" height="20" rx="3"/><rect class="m" x="22" y="82" width="36" height="20" rx="3"/><rect class="m" x="142" y="82" width="36" height="20" rx="3"/>',
+  flow: '<rect class="m" x="14" y="44" width="40" height="26" rx="3"/><rect class="m" x="80" y="44" width="40" height="26" rx="3"/><rect class="f" x="146" y="44" width="40" height="26" rx="3"/><path class="s" d="M54 57H80M120 57H146"/><path class="s" d="M34 44V24H166V44" stroke-dasharray="4 4"/>',
+  check: '<rect class="m" x="20" y="18" width="160" height="16" rx="3"/><rect class="m" x="20" y="48" width="160" height="16" rx="3"/><rect class="m" x="20" y="78" width="160" height="16" rx="3"/><path class="s" d="M28 26l5 5 9-10M28 56l5 5 9-10"/><path class="s" d="M28 80l12 12M40 80L28 92"/>',
+  bars: '<g class="f"><rect x="22" y="70" width="18" height="30" rx="2"/><rect x="50" y="52" width="18" height="48" rx="2"/><rect x="78" y="60" width="18" height="40" rx="2"/><rect x="106" y="34" width="18" height="66" rx="2"/><rect x="134" y="44" width="18" height="56" rx="2"/><rect x="162" y="22" width="18" height="78" rx="2"/></g>',
+  api: '<rect class="m" x="16" y="34" width="56" height="46" rx="4"/><rect class="m" x="128" y="20" width="56" height="20" rx="3"/><rect class="m" x="128" y="48" width="56" height="20" rx="3"/><rect class="f" x="128" y="76" width="56" height="20" rx="3"/><path class="s" d="M72 57H100M100 30V86M100 30H128M100 58H128M100 86H128"/>',
+  line: '<path class="m" d="M20 100H180" stroke="none"/><path class="s" d="M20 88L46 80L72 84L98 60L124 64L150 40L180 30"/><circle class="f" cx="180" cy="30" r="5"/><path class="s" d="M20 100H180" opacity=".4"/>',
+  dag: '<circle class="m" cx="30" cy="57" r="13"/><circle class="m" cx="80" cy="57" r="13"/><circle class="m" cx="130" cy="57" r="13"/><circle class="f" cx="176" cy="57" r="13"/><path class="s" d="M43 57H67M93 57H117M143 57H163"/>',
+  gauge: '<path class="s" d="M40 92A60 60 0 0 1 160 92" stroke-width="8" opacity=".3"/><path class="s" d="M40 92A60 60 0 0 1 132 44" stroke-width="8"/><path class="s" d="M100 92L128 52"/><circle class="f" cx="100" cy="92" r="6"/>',
+  sync: '<rect class="m" x="18" y="34" width="54" height="46" rx="4"/><rect class="f" x="128" y="34" width="54" height="46" rx="4"/><path class="s" d="M76 46C92 30 110 30 124 46M124 68C110 84 92 84 76 68"/><path class="s" d="M118 38l6 8-9 3M82 76l-6-8 9-3"/>',
+  map: '<g class="m"><rect x="24" y="16" width="34" height="26" rx="2"/><rect x="62" y="16" width="34" height="26" rx="2"/><rect x="100" y="16" width="34" height="26" rx="2"/><rect x="24" y="46" width="34" height="26" rx="2"/><rect x="100" y="46" width="34" height="26" rx="2"/><rect x="24" y="76" width="34" height="26" rx="2"/><rect x="62" y="76" width="34" height="26" rx="2"/></g><rect class="f" x="62" y="46" width="34" height="26" rx="2"/><path class="s" d="M146 92L160 70L172 78L184 50"/>'
+};
+
+const TECH = [
+  ["ETL and ELT pipelines", "Designing and running SSIS and T-SQL pipelines that load incrementally, log every run and can be re-run without side effects.", "flow"],
+  ["Data warehousing", "Dimensional models with fact and dimension tables, slowly changing dimensions and surrogate keys, ready for reporting.", "db"],
+  ["Data migration", "Moving data between systems with mapping, reconciliation counts and clear sign-off on what was moved.", "move"],
+  ["Data quality", "Automated checks for completeness, duplicates, referential integrity and freshness, with results kept over time.", "check"],
+  ["Data visualisation", "Power BI models and reports built on clean star schemas, with measures that are documented and tested.", "chart"],
+  ["Forecasting and machine learning", "Using Python to forecast demand and spot patterns in operational data where it adds real value.", "trend"]
+];
+
+const SOFT = [
+  ["Problem solving", "Breaking a messy data problem into parts, finding the root cause and fixing it properly rather than patching symptoms.", "puzzle"],
+  ["Communication", "Explaining technical work in plain terms to service managers, analysts and partner organisations.", "chat"],
+  ["Attention to detail", "Reconciling numbers end to end, because one wrong join in public sector data affects real decisions.", "eye"],
+  ["Ownership", "Finding work that needs doing, documenting it and leaving systems easier to maintain than I found them.", "flag"]
+];
+
+const ICON = {
+  flow: '<path d="M4 7h6v4H4zM14 13h6v4h-6zM10 9h2v6h2"/>',
+  db: '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>',
+  move: '<path d="M4 12h14M14 7l5 5-5 5"/>',
+  check: '<path d="M5 12l4 4 10-10"/>',
+  chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  trend: '<path d="M3 17l6-6 4 4 8-8M15 7h6v6"/>',
+  puzzle: '<path d="M9 4h6v4a2 2 0 1 0 4 0h1v6h-4a2 2 0 1 0 0 4h4v2H4v-6h1a2 2 0 1 0 0-4H4V4z"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4z"/>',
+  eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  flag: '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>'
+};
+
+const SVG = {
+  github: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.9 10.9c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>',
+  linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.5H3.5V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg>',
+  email: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2zm2 2v.5l8 5 8-5V7zm16 10V9.8l-8 5-8-5V17z"/></svg>',
+  cv: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6zm8 1.5V8h4.5zM9 12h8v1.5H9zm0 3h8v1.5H9zm0 3h5v1.5H9z"/></svg>'
+};
+
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+document.getElementById("project-grid").innerHTML = PROJECTS.map(p => `
+  <article class="project">
+    <a class="thumb" href="${REPO + p.dir}" target="_blank" rel="noopener" aria-label="${esc(p.title)} on GitHub">
+      <svg viewBox="0 0 200 114" role="img" aria-hidden="true">${ART[p.art]}</svg>
+    </a>
+    <h3><a href="${REPO + p.dir}" target="_blank" rel="noopener">${esc(p.title)}</a></h3>
+    <div class="tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+    <p>${esc(p.text)}</p>
+    <a class="more" href="${REPO + p.dir}" target="_blank" rel="noopener">View project</a>
+  </article>`).join("");
+
+const skillHTML = list => list.map(([h, p, i]) => `
+  <div class="skill"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[i]}</svg></div>
+  <div><h4>${esc(h)}</h4><p>${esc(p)}</p></div></div>`).join("");
+document.getElementById("tech-skills").innerHTML = skillHTML(TECH);
+document.getElementById("soft-skills").innerHTML = skillHTML(SOFT);
+
+const contacts = [
+  PROFILE.email && { k: "email", label: PROFILE.email, href: "mailto:" + PROFILE.email },
+  PROFILE.linkedin && { k: "linkedin", label: "LinkedIn", href: PROFILE.linkedin },
+  PROFILE.github && { k: "github", label: "github.com/Bimmerish", href: PROFILE.github },
+  PROFILE.cv && { k: "cv", label: "Download CV", href: PROFILE.cv }
+].filter(Boolean);
+
+const contactHTML = contacts.map(c => `<li>${SVG[c.k]}<a href="${esc(c.href)}" target="_blank" rel="noopener">${esc(c.label)}</a></li>`).join("");
+document.getElementById("side-contacts").innerHTML = contactHTML;
+document.getElementById("main-contacts").innerHTML = contactHTML;
+
+const topIcons = document.getElementById("top-icons");
+contacts.filter(c => c.k !== "cv").forEach(c => {
+  const a = document.createElement("a");
+  a.href = c.href; a.target = "_blank"; a.rel = "noopener"; a.setAttribute("aria-label", c.label);
+  a.innerHTML = SVG[c.k];
+  topIcons.insertBefore(a, topIcons.firstChild);
+});
+
+if (PROFILE.photo) {
+  document.getElementById("portrait").innerHTML = `<img src="${esc(PROFILE.photo)}" alt="Bolaji Adekunle">`;
+}
+
+const y = new Date().getFullYear();
+document.getElementById("year").textContent = y;
+document.getElementById("year2").textContent = y;
+
+const sidebar = document.getElementById("sidebar"), scrim = document.getElementById("scrim"), btn = document.getElementById("menu-btn");
+function setMenu(open) {
+  sidebar.classList.toggle("open", open);
+  scrim.hidden = !open;
+  btn.setAttribute("aria-expanded", open);
+}
+btn.addEventListener("click", () => setMenu(!sidebar.classList.contains("open")));
+scrim.addEventListener("click", () => setMenu(false));
+sidebar.querySelectorAll(".menu a[href^='#']").forEach(a => a.addEventListener("click", () => setMenu(false)));
+document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+</script>
+
+</body>
+</html>
