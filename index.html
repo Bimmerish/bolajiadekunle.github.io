@@ -11,7 +11,7 @@
 <style>
 [hidden] { display: none !important; }
 img { max-width: 100%; }
-/* Layout: editorial portfolio. Fixed left sidebar (menu, contact) on wide screens, slide-in drawer on phones; main column with header bar, intro, projects, experience, skills. */
+/* Layout: editorial portfolio. Fixed left sidebar (menu, contact) on wide screens, slide-in drawer on phones; main column with header bar, intro, projects, skills, contact. */
 :root {
   --bg: #ffffff;
   --panel: #f4f6f8;
@@ -89,7 +89,7 @@ section:last-of-type { border-bottom: 0; }
 
 /* Intro */
 .intro { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 56px; align-items: start; }
-.intro h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); }
+.intro h1 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
 .headline { font: 600 1.05rem var(--body); color: var(--accent); margin: 12px 0 22px; letter-spacing: 0.01em; }
 .intro p { margin: 0 0 16px; max-width: 64ch; }
 .stats { display: flex; gap: 28px; flex-wrap: wrap; margin: 26px 0 30px; padding: 18px 0; border-block: 1px solid var(--line); }
@@ -106,27 +106,19 @@ section:last-of-type { border-bottom: 0; }
 /* Projects */
 .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px 32px; }
 .project { display: grid; gap: 12px; align-content: start; }
-.thumb { aspect-ratio: 16 / 9; max-width: 100%; border-radius: 6px; background: var(--panel); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
-.thumb svg { width: 78%; height: auto; }
-.thumb .s { stroke: var(--accent); fill: none; stroke-width: 2; }
-.thumb .f { fill: var(--accent); }
-.thumb .m { fill: var(--line); }
-.project h3 { font-size: 1.15rem; }
+.thumb { display: block; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 6px; background: var(--panel); border: 1px solid var(--line); overflow: hidden; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+.thumb:hover img { transform: scale(1.03); }
+@media (prefers-reduced-motion: reduce) { .thumb img { transition: none; } }
+.credit { font-size: 0.72rem; color: var(--muted); margin-top: -6px; }
+.credit a { color: inherit; }
+.project h3 { font-size: 1.4rem; }
 .project h3 a { color: inherit; text-decoration: none; }
 .project h3 a:hover { color: var(--accent); }
-.project p { margin: 0; color: var(--ink); font-size: 0.98rem; }
+.project p { margin: 0; color: var(--ink); font-size: 1.05rem; }
 .tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { font: 600 0.72rem var(--body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 2px 8px; }
 .project .more { font: 700 0.78rem var(--body); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
-
-/* Experience */
-.timeline { display: grid; gap: 28px; max-width: 760px; }
-.role { display: grid; grid-template-columns: 14px 1fr; gap: 18px; }
-.role::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 8px; }
-.role h3 { font-size: 1.15rem; }
-.role .where { color: var(--muted); font-size: 0.92rem; margin: 2px 0 8px; }
-.role ul { margin: 0; padding-left: 18px; }
-.role li { margin: 4px 0; }
 
 /* Skills */
 .skill-group + .skill-group { margin-top: 48px; }
@@ -172,7 +164,6 @@ section:last-of-type { border-bottom: 0; }
       <ul class="menu">
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="https://github.com/Bimmerish/data-engineering-portfolio" target="_blank" rel="noopener">Source code</a></li>
@@ -180,7 +171,7 @@ section:last-of-type { border-bottom: 0; }
     </nav>
     <div class="side-contact">
       <div class="side-title">Get in touch</div>
-      <p>Happy to talk about data engineering, public sector data, or any of the projects here.</p>
+      <p>I'm looking for a data science or data engineering role where I can put my skills to work, take on more responsibility, and keep learning and progressing in my career. I want to join an organisation where my work makes a real difference to the team and the wider business.</p>
       <ul class="contact-list" id="side-contacts"></ul>
     </div>
     <div class="side-foot">© <span id="year">2026</span> Bolaji Adekunle</div>
@@ -190,7 +181,7 @@ section:last-of-type { border-bottom: 0; }
   <div class="main">
     <header class="topbar">
       <div class="inner">
-        <a class="logo" href="#about"><strong>Bolaji Adekunle</strong> · Data Engineer</a>
+        <a class="logo" href="#about"><strong>Bolaji Adekunle's</strong> portfolio</a>
         <div class="icons" id="top-icons">
           <button class="menu-btn" id="menu-btn" aria-controls="sidebar" aria-expanded="false">Menu</button>
         </div>
@@ -201,15 +192,14 @@ section:last-of-type { border-bottom: 0; }
       <section id="about">
         <div class="intro">
           <div>
-            <div class="eyebrow">Data Engineer</div>
             <h1>Hi, I'm Bolaji Adekunle</h1>
             <div class="headline">Data Engineer | Data Scientist | SQL Server</div>
-            <p>I'm a data engineer with five years' experience in the public sector. I've worked on forecasting and operational reporting for electronic monitoring services, and with local government data across healthcare, social care, and adult and children's services.</p>
-            <p>Most of my work is building and running the pipelines that take data from operational systems into warehouses and reports that people depend on. That means ETL and ELT in SQL Server and SSIS, migrating data between platforms, data warehousing, and modelling data for Power BI. I care about pipelines that can be re-run safely, fail clearly when something is wrong, and are easy for the next person to pick up.</p>
-            <p>I also use Python and machine learning for forecasting and analysis where it adds value, and I'm comfortable with cloud platforms and database administration.</p>
+            <p>Over the past five years I've worked across the public and private sectors, turning data into insight that supports better decisions. My experience includes forecasting and operational reporting for electronic monitoring services across England and Wales, and working with local government data across healthcare, social care, and adult and children's services.</p>
+            <p>Most of my work is building and running the pipelines that take data from operational systems into the warehouses and reports people depend on. That means ETL and ELT in SQL Server and SSIS, migrating data between platforms, data warehousing, and modelling data for Power BI. I build pipelines that can be rerun safely, fail clearly when something is wrong, and are easy for the next person to pick up.</p>
+            <p>I also use Python and machine learning for forecasting and analysis where they add value, and I'm comfortable with cloud platforms and database administration.</p>
             <p>Alongside my core role, I've supported the Youth Futures Foundation's work in Blackpool, helping improve the local data ecosystem behind efforts to reduce the number of young people who are not in education, employment or training (NEET).</p>
             <div class="stats">
-              <div class="stat"><b>5 yrs</b><span>Public sector data</span></div>
+              <div class="stat"><b>5 yrs</b><span>Public and private sector</span></div>
               <div class="stat"><b>Up to 90%</b><span>Faster data processing</span></div>
               <div class="stat"><b>Up to 60%</b><span>Operational efficiency gains</span></div>
             </div>
@@ -224,41 +214,10 @@ section:last-of-type { border-bottom: 0; }
 
       <section id="projects">
         <div class="section-head">
-          <div class="eyebrow">Projects</div>
-          <h2>Selected work</h2>
-          <p>Built on public datasets so the code and data can be shared. Each project has setup steps and notes on the design decisions behind it.</p>
+          <h2>Projects</h2>
+          <p>All the projects are built on public datasets, so the code and data can be shared. Each one includes setup steps and notes on the design decisions behind it.</p>
         </div>
         <div class="projects" id="project-grid"></div>
-      </section>
-
-      <section id="experience">
-        <div class="section-head">
-          <div class="eyebrow">Experience</div>
-          <h2>Where I've worked with data</h2>
-        </div>
-        <div class="timeline">
-          <div class="role">
-            <div>
-              <h3>Data Engineer, local government</h3>
-              <div class="where">Healthcare, social care, adult and children's services</div>
-              <ul>
-                <li>Build and maintain SQL Server and SSIS pipelines feeding operational systems and Power BI reporting.</li>
-                <li>Migrate data between platforms and keep the database estate healthy.</li>
-                <li>Support the Youth Futures Foundation's NEET reduction work in Blackpool by improving how local data is joined up.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="role">
-            <div>
-              <h3>Electronic monitoring services</h3>
-              <div class="where">Forecasting and operations data</div>
-              <ul>
-                <li>Delivered forecasting and operational reporting for electronic monitoring services.</li>
-                <li>Worked with operations teams to turn monitoring data into planning information.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </section>
 
       <section id="skills">
@@ -300,48 +259,66 @@ section:last-of-type { border-bottom: 0; }
 const PROFILE = {
   github: "https://github.com/Bimmerish",
   linkedin: "https://www.linkedin.com/in/bolaji-a-886ab31a2/",
-  email: "",             // a public contact address
+  email: "adekunlebit@gmail.com",
   cv: "",                // link to your CV
-  photo: ""              // e.g. "images/profile.jpg"
+  photo: "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=GV7BH98AAAAJ&citpid=24"
 };
 
 const REPO = "https://github.com/Bimmerish/data-engineering-portfolio/tree/main/";
 
+const W = "https://thumb.wikimedia.org/wikipedia/commons/thumb/";
 const PROJECTS = [
-  { dir: "01-retail-sales-dwh", title: "Retail Sales Data Warehouse", tags: ["T-SQL"], art: "star",
-    text: "Star schema built from AdventureWorks, with a Type 2 customer dimension and a fact load that can be re-run safely for any date range." },
-  { dir: "02-incremental-load-framework", title: "Incremental Load Framework", tags: ["T-SQL", "SSIS"], art: "flow",
-    text: "Watermark-based loading with a control table, run log and row count reconciliation. The watermark only moves after a successful load." },
-  { dir: "03-data-quality-monitoring", title: "Data Quality Monitoring", tags: ["T-SQL"], art: "check",
-    text: "Data quality rules stored as data. One procedure runs them after each load, records every result, and fails the job on critical issues." },
-  { dir: "04-nyc-taxi-pipeline", title: "NYC Taxi Trips Pipeline", tags: ["Python", "SQL Server"], art: "bars",
-    text: "Loads millions of NYC taxi trips a month from Parquet into SQL Server in batches, logs rejected rows, and publishes each month in one transaction." },
-  { dir: "05-api-ingestion-pipeline", title: "REST API Ingestion", tags: ["Python"], art: "api",
-    text: "Pulls historical weather from the Open-Meteo API with retries and backoff, keeping raw responses so data can be rebuilt without calling the API again." },
-  { dir: "06-uk-house-prices-sql", title: "UK House Prices Analysis", tags: ["T-SQL"], art: "line",
-    text: "Land Registry sales analysed with window functions: median prices, year-on-year change, rolling averages and top districts by county." },
-  { dir: "07-airflow-orchestration", title: "Airflow Orchestration", tags: ["Python", "Airflow", "Docker"], art: "dag",
-    text: "Daily DAG that extracts, validates, loads and reports, with retries, a validation gate and failure alerts. Compared against SSIS and SQL Agent." },
-  { dir: "08-query-tuning-case-study", title: "Query Tuning Case Study", tags: ["T-SQL"], art: "gauge",
-    text: "Five common causes of slow queries on the Stack Overflow database, diagnosed from execution plans and measured before and after each fix." },
-  { dir: "09-change-tracking-sync", title: "Change Tracking Sync", tags: ["T-SQL", "Python"], art: "sync",
-    text: "Keeps a reporting copy in step with its source using SQL Server Change Tracking, including deletes, with a safe fallback to a full reload." },
-  { dir: "10-public-health-powerbi", title: "Public Health Data Pipeline", tags: ["Python", "Power BI"], art: "map",
-    text: "Public health indicators from the Fingertips API turned into a star schema and Power BI model with measures for trends and area comparison." }
+  { dir: "01-retail-sales-dwh", title: "Retail Sales Data Warehouse", tags: ["T-SQL"],
+    text: "Star schema built from AdventureWorks, with a Type 2 customer dimension and a fact load that can be rerun safely for any date range.",
+    img: W + "a/a2/Modern_warehouse_with_pallet_rack_storage_system.jpg/960px-Modern_warehouse_with_pallet_rack_storage_system.jpg",
+    alt: "Warehouse with tall pallet racking", by: "Axisadman", lic: "CC BY-SA 3.0",
+    src: "https://commons.wikimedia.org/wiki/File:Modern_warehouse_with_pallet_rack_storage_system.jpg" },
+  { dir: "02-incremental-load-framework", title: "Incremental Load Framework", tags: ["T-SQL", "SSIS"],
+    text: "Watermark-based loading with a control table, run log and row count reconciliation. The watermark only moves after a successful load.",
+    img: W + "3/38/Container_cranes_at_the_Port_of_Oakland.jpg/960px-Container_cranes_at_the_Port_of_Oakland.jpg",
+    alt: "Container cranes loading ships at the Port of Oakland", by: "Cullen328", lic: "CC BY-SA 4.0",
+    src: "https://commons.wikimedia.org/wiki/File:Container_cranes_at_the_Port_of_Oakland.jpg" },
+  { dir: "03-data-quality-monitoring", title: "Data Quality Monitoring", tags: ["T-SQL"],
+    text: "Data quality rules stored as data. One procedure runs them after each load, records every result, and fails the job on critical issues.",
+    img: W + "5/50/Magnifying_glass2.jpg/960px-Magnifying_glass2.jpg",
+    alt: "Magnifying glass", by: "Heptagon", lic: "Public domain",
+    src: "https://commons.wikimedia.org/wiki/File:Magnifying_glass2.jpg" },
+  { dir: "04-nyc-taxi-pipeline", title: "NYC Taxi Trips Pipeline", tags: ["Python", "SQL Server"],
+    text: "Loads millions of NYC taxi trips a month from Parquet into SQL Server in batches, logs rejected rows, and publishes each month in one transaction.",
+    img: W + "6/6a/Yellow_Cabs_in_NYC_%28Unsplash%29.jpg/960px-Yellow_Cabs_in_NYC_%28Unsplash%29.jpg",
+    alt: "Yellow cabs on a New York street", by: "Ferdinand Stöhr", lic: "CC0",
+    src: "https://commons.wikimedia.org/wiki/File:Yellow_Cabs_in_NYC_(Unsplash).jpg" },
+  { dir: "05-api-ingestion-pipeline", title: "REST API Ingestion", tags: ["Python"],
+    text: "Pulls historical weather from the Open-Meteo API with retries and backoff, keeping raw responses so data can be rebuilt without calling the API again.",
+    img: W + "0/00/22_August_2020%2C_automatic_weather_station%2C_Monte_Generoso.jpg/960px-22_August_2020%2C_automatic_weather_station%2C_Monte_Generoso.jpg",
+    alt: "Automatic weather station on Monte Generoso", by: "JoJo Eumerus mobile", lic: "CC BY-SA 4.0",
+    src: "https://commons.wikimedia.org/wiki/File:22_August_2020,_automatic_weather_station,_Monte_Generoso.jpg" },
+  { dir: "06-uk-house-prices-sql", title: "UK House Prices Analysis", tags: ["T-SQL"],
+    text: "Land Registry sales analysed with window functions: median prices, year-on-year change, rolling averages and top districts by county.",
+    img: W + "d/d8/Terraced_houses_on_East_Street_-_geograph.org.uk_-_8079595.jpg/960px-Terraced_houses_on_East_Street_-_geograph.org.uk_-_8079595.jpg",
+    alt: "Row of terraced houses in England", by: "Philip Jeffrey", lic: "CC BY-SA 2.0",
+    src: "https://commons.wikimedia.org/wiki/File:Terraced_houses_on_East_Street_-_geograph.org.uk_-_8079595.jpg" },
+  { dir: "07-airflow-orchestration", title: "Airflow Orchestration", tags: ["Python", "Airflow", "Docker"],
+    text: "Daily DAG that extracts, validates, loads and reports, with retries, a validation gate and failure alerts. Compared against SSIS and SQL Agent.",
+    img: W + "e/e3/Tower_Air_traffic_control.jpg/960px-Tower_Air_traffic_control.jpg",
+    alt: "Air traffic controllers at work in a control tower", by: "Axel Péju", lic: "CC BY 2.0",
+    src: "https://commons.wikimedia.org/wiki/File:Tower_Air_traffic_control.jpg" },
+  { dir: "08-query-tuning-case-study", title: "Query Tuning Case Study", tags: ["T-SQL"],
+    text: "Five common causes of slow queries on the Stack Overflow database, diagnosed from execution plans and measured before and after each fix.",
+    img: W + "b/b3/Datacenter_Server_Racks_%2822370909788%29.jpg/960px-Datacenter_Server_Racks_%2822370909788%29.jpg",
+    alt: "Rows of server racks in a data centre", by: "Carl Lender", lic: "CC BY 2.0",
+    src: "https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg" },
+  { dir: "09-change-tracking-sync", title: "Change Tracking Sync", tags: ["T-SQL", "Python"],
+    text: "Keeps a reporting copy in step with its source using SQL Server Change Tracking, including deletes, with a safe fallback to a full reload.",
+    img: W + "3/33/Railway_tracks_and_points_at_Clapham_Junction_-_geograph.org.uk_-_2552768.jpg/960px-Railway_tracks_and_points_at_Clapham_Junction_-_geograph.org.uk_-_2552768.jpg",
+    alt: "Railway tracks and points at Clapham Junction", by: "Bill Boaden", lic: "CC BY-SA 2.0",
+    src: "https://commons.wikimedia.org/wiki/File:Railway_tracks_and_points_at_Clapham_Junction_-_geograph.org.uk_-_2552768.jpg" },
+  { dir: "10-public-health-powerbi", title: "Public Health Data Pipeline", tags: ["Python", "Power BI"],
+    text: "Public health indicators from the Fingertips API turned into a star schema and Power BI model with measures for trends and area comparison.",
+    img: W + "5/5e/Leicester_General_Hospital%2C_Evington%2C_Leicester_-_geograph.org.uk_-_4292391.jpg/960px-Leicester_General_Hospital%2C_Evington%2C_Leicester_-_geograph.org.uk_-_4292391.jpg",
+    alt: "Leicester General Hospital", by: "David Hallam-Jones", lic: "CC BY-SA 2.0",
+    src: "https://commons.wikimedia.org/wiki/File:Leicester_General_Hospital,_Evington,_Leicester_-_geograph.org.uk_-_4292391.jpg" }
 ];
-
-const ART = {
-  star: '<circle class="f" cx="100" cy="56" r="13"/><g class="s"><path d="M100 56L40 22M100 56L160 22M100 56L40 92M100 56L160 92"/></g><rect class="m" x="22" y="12" width="36" height="20" rx="3"/><rect class="m" x="142" y="12" width="36" height="20" rx="3"/><rect class="m" x="22" y="82" width="36" height="20" rx="3"/><rect class="m" x="142" y="82" width="36" height="20" rx="3"/>',
-  flow: '<rect class="m" x="14" y="44" width="40" height="26" rx="3"/><rect class="m" x="80" y="44" width="40" height="26" rx="3"/><rect class="f" x="146" y="44" width="40" height="26" rx="3"/><path class="s" d="M54 57H80M120 57H146"/><path class="s" d="M34 44V24H166V44" stroke-dasharray="4 4"/>',
-  check: '<rect class="m" x="20" y="18" width="160" height="16" rx="3"/><rect class="m" x="20" y="48" width="160" height="16" rx="3"/><rect class="m" x="20" y="78" width="160" height="16" rx="3"/><path class="s" d="M28 26l5 5 9-10M28 56l5 5 9-10"/><path class="s" d="M28 80l12 12M40 80L28 92"/>',
-  bars: '<g class="f"><rect x="22" y="70" width="18" height="30" rx="2"/><rect x="50" y="52" width="18" height="48" rx="2"/><rect x="78" y="60" width="18" height="40" rx="2"/><rect x="106" y="34" width="18" height="66" rx="2"/><rect x="134" y="44" width="18" height="56" rx="2"/><rect x="162" y="22" width="18" height="78" rx="2"/></g>',
-  api: '<rect class="m" x="16" y="34" width="56" height="46" rx="4"/><rect class="m" x="128" y="20" width="56" height="20" rx="3"/><rect class="m" x="128" y="48" width="56" height="20" rx="3"/><rect class="f" x="128" y="76" width="56" height="20" rx="3"/><path class="s" d="M72 57H100M100 30V86M100 30H128M100 58H128M100 86H128"/>',
-  line: '<path class="m" d="M20 100H180" stroke="none"/><path class="s" d="M20 88L46 80L72 84L98 60L124 64L150 40L180 30"/><circle class="f" cx="180" cy="30" r="5"/><path class="s" d="M20 100H180" opacity=".4"/>',
-  dag: '<circle class="m" cx="30" cy="57" r="13"/><circle class="m" cx="80" cy="57" r="13"/><circle class="m" cx="130" cy="57" r="13"/><circle class="f" cx="176" cy="57" r="13"/><path class="s" d="M43 57H67M93 57H117M143 57H163"/>',
-  gauge: '<path class="s" d="M40 92A60 60 0 0 1 160 92" stroke-width="8" opacity=".3"/><path class="s" d="M40 92A60 60 0 0 1 132 44" stroke-width="8"/><path class="s" d="M100 92L128 52"/><circle class="f" cx="100" cy="92" r="6"/>',
-  sync: '<rect class="m" x="18" y="34" width="54" height="46" rx="4"/><rect class="f" x="128" y="34" width="54" height="46" rx="4"/><path class="s" d="M76 46C92 30 110 30 124 46M124 68C110 84 92 84 76 68"/><path class="s" d="M118 38l6 8-9 3M82 76l-6-8 9-3"/>',
-  map: '<g class="m"><rect x="24" y="16" width="34" height="26" rx="2"/><rect x="62" y="16" width="34" height="26" rx="2"/><rect x="100" y="16" width="34" height="26" rx="2"/><rect x="24" y="46" width="34" height="26" rx="2"/><rect x="100" y="46" width="34" height="26" rx="2"/><rect x="24" y="76" width="34" height="26" rx="2"/><rect x="62" y="76" width="34" height="26" rx="2"/></g><rect class="f" x="62" y="46" width="34" height="26" rx="2"/><path class="s" d="M146 92L160 70L172 78L184 50"/>'
-};
 
 const TECH = [
   ["ETL and ELT pipelines", "Designing and running SSIS and T-SQL pipelines that load incrementally, log every run and can be re-run without side effects.", "flow"],
@@ -384,8 +361,9 @@ const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&
 document.getElementById("project-grid").innerHTML = PROJECTS.map(p => `
   <article class="project">
     <a class="thumb" href="${REPO + p.dir}" target="_blank" rel="noopener" aria-label="${esc(p.title)} on GitHub">
-      <svg viewBox="0 0 200 114" role="img" aria-hidden="true">${ART[p.art]}</svg>
+      <img src="${p.img}" alt="${esc(p.alt)}" loading="lazy" decoding="async">
     </a>
+    <div class="credit">Photo: <a href="${p.src}" target="_blank" rel="noopener">${esc(p.by)}</a>, ${esc(p.lic)}, via Wikimedia Commons</div>
     <h3><a href="${REPO + p.dir}" target="_blank" rel="noopener">${esc(p.title)}</a></h3>
     <div class="tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
     <p>${esc(p.text)}</p>
@@ -418,7 +396,11 @@ contacts.filter(c => c.k !== "cv").forEach(c => {
 });
 
 if (PROFILE.photo) {
-  document.getElementById("portrait").innerHTML = `<img src="${esc(PROFILE.photo)}" alt="Bolaji Adekunle">`;
+  const portrait = document.getElementById("portrait");
+  const img = new Image();
+  img.alt = "Bolaji Adekunle";
+  img.onload = () => { portrait.innerHTML = ""; portrait.appendChild(img); };
+  img.src = PROFILE.photo;   // initials stay if the photo cannot load
 }
 
 const y = new Date().getFullYear();
